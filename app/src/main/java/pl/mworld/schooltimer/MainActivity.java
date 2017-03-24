@@ -7,8 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private SharedPreferences mShared;
     static private TextView timerView;
+    private SharedPreferences mShared;
+
+    static public TextView getTimerView() {
+        return timerView;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         startService(new Intent(this, Timer.class));
     }
-    static public TextView getTimerView(){
-        return timerView;
-    }
+
     @Override
     protected void onStop() {
-        if(mShared.getBoolean("isNotificationOn", false) == true){
+        if (mShared.getBoolean("isNotificationOn", false) == true) {
             stopService(new Intent(this, Timer.class));
         }
         super.onStop();

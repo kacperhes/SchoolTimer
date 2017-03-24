@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Created by ROOT on 2017-03-23.
  */
 
-public class Timer extends Service{
+public class Timer extends Service {
     private SharedPreferences mShared;
     private long timeSinceMidnight;
     private TextView timerView;
@@ -25,7 +25,7 @@ public class Timer extends Service{
     private boolean isNotificationOn;
     private boolean isWorking;
 
-    public Timer(){
+    public Timer() {
         timeSinceMidnight = new GregorianCalendar().getTimeInMillis();
         timerView = MainActivity.getTimerView();
         ringTimes = mSharedGetter();
@@ -34,25 +34,29 @@ public class Timer extends Service{
 
         start();
     }
-    private void start(){
+
+    private void start() {
         isWorking = true;
         actualRing();
         timeToNextRingSetter();
         timer(timeToNextRing);
     }
-    private void actualRing(){
-        for(int i = 0; ; i++){
-            if(ringTimes[i] >= timeSinceMidnight){
-                numberOfActualRing = i-1;
+
+    private void actualRing() {
+        for (int i = 0; ; i++) {
+            if (ringTimes[i] >= timeSinceMidnight) {
+                numberOfActualRing = i - 1;
                 break;
             }
         }
     }
-    private void timeToNextRingSetter(){
+
+    private void timeToNextRingSetter() {
         timeToNextRing = ringTimes[numberOfActualRing] - timeSinceMidnight;
     }
-    private void timer(long time){
-        new CountDownTimer(time, 1000){
+
+    private void timer(long time) {
+        new CountDownTimer(time, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -68,15 +72,17 @@ public class Timer extends Service{
             }
         }.start();
     }
-    public void stop(){
+
+    public void stop() {
         //TODO what to do here???
     }
 
     /**
      * Gets table of ringtimes from SharedPreferances with key formula "ring<number starting 0>".
+     *
      * @return Table of ringtimes.
      */
-    private long[] mSharedGetter(){
+    private long[] mSharedGetter() {
         long[] times = new long[30];
         times[0] = mShared.getLong("ring0", 0);
         times[1] = mShared.getLong("ring1", 0);
