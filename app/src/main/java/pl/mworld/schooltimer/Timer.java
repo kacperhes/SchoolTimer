@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class Timer extends Service{
-
     private SharedPreferences mShared;
     private long timeSinceMidnight;
     private TextView timerView;
@@ -26,13 +25,9 @@ public class Timer extends Service{
     private boolean isNotificationOn;
     private boolean isWorking;
 
-    public Timer() throws Exception {
-        Exception defaultConstructorException = new Exception("Don`t use that constructor");
-        throw defaultConstructorException;
-    }
-    public Timer(TextView timer){
+    public Timer(){
         timeSinceMidnight = new GregorianCalendar().getTimeInMillis();
-        timerView = timer;
+        timerView = MainActivity.getTimerView();
         ringTimes = mSharedGetter();
         isNotificationOn = mShared.getBoolean("isNotificationOn", false);
         isWorking = false;
@@ -41,7 +36,8 @@ public class Timer extends Service{
     }
     private void start(){
         isWorking = true;
-
+        actualRing();
+        timeToNextRingSetter();
 
     }
     private void actualRing(){
