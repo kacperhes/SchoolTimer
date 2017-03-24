@@ -38,7 +38,7 @@ public class Timer extends Service{
         isWorking = true;
         actualRing();
         timeToNextRingSetter();
-
+        timer(timeToNextRing);
     }
     private void actualRing(){
         for(int i = 0; ; i++){
@@ -64,11 +64,12 @@ public class Timer extends Service{
             @Override
             public void onFinish() {
                 timerView.setText(R.string.ringIsRinging);
+                Timer.this.start();
             }
-        };
+        }.start();
     }
     public void stop(){
-
+        //TODO what to do here???
     }
 
     /**
