@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SchoolTimer</string>
+    <string name="ringIsRinging">The ring is ringing.</string>
 </resources>
