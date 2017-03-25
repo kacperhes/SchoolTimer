@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SchoolTimer</string>
     <string name="ringIsRinging">The ring is ringing.</string>
+    <string name="ringTimeSetting">Set up ring times</string>
 </resources>

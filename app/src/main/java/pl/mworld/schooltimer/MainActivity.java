@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,5 +30,9 @@ public class MainActivity extends AppCompatActivity {
             stopService(new Intent(this, Timer.class));
         }
         super.onStop();
+    }
+
+    void floatingSettings(View view){
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 }

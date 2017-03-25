@@ -15,10 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".Timer">
 
-        </service>
+        <service android:name=".Timer" />
 
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".RingsTimeSetting"></activity>
     </application>
 
 </manifest>
