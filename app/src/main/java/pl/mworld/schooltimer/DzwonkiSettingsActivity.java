@@ -7,26 +7,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DzwonkiSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    int actualRingChanged = 0;
+public class DzwonkiSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+    long actualRingChanged = 1;
+    EditText editText;
+    SharedPreferences.Editor mSharedEditor;
+    SharedPreferences mShared;
+    Spinner spinner;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dzwonki_settings);
 
-        SharedPreferences mShared = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor mSharedEditor = mShared.edit();
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        mShared = PreferenceManager.getDefaultSharedPreferences(this);
+        mSharedEditor = mShared.edit();
+
+        spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        //TODO sth when text is done edited
+
+        editText = (EditText) findViewById(R.id.editText);
+
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(this);
 
         // Spinner Drop down elements
         List<String> ringList = new ArrayList<String>();
@@ -40,18 +51,31 @@ public class DzwonkiSettingsActivity extends AppCompatActivity implements Adapte
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
+        // Attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        actualRingChanged = i;
+        // Set actual edited ring
+        actualRingChanged = ++l;
+
+        // Set time in edittext
+        //TODO Doesn`t work
+        //editText.setText(mShared.getString(Integer.valueOf(actualRingChanged).toString(),"0"));
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        // Put time edited into actual ring
+        if(mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).commit()) {
+            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+        }
     }
 }
