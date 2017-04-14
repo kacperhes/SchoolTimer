@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">SchoolTimer</string>
     <string name="action_settings">Settings</string>
+    <string name="numer_dzwonka">Numer dzwonka</string>
+    <string name="czas_dzwonka_jako_sekunda_dnia">Czas dzwonka(jako sekunda dnia)</string>
+    <string name="potwierdzenie">Potwierdzenie</string>
+    <string name="zatwierd">Zatwierdź</string>
 </resources>
