@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +73,6 @@ public class DzwonkiSettingsActivity extends AppCompatActivity implements Adapte
     @Override
     public void onClick(View view) {
         // Put time edited into actual ring
-        if(mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).commit()) {
-            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
-        }
+        mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).commit();
     }
 }

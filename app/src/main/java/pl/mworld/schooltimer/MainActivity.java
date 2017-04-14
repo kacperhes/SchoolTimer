@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;
     TextView textView;
 
@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         setSupportActionBar(toolbar);
 
         mShared = PreferenceManager.getDefaultSharedPreferences(this);
-        mShared.registerOnSharedPreferenceChangeListener(this);
 
         final Context context = getApplicationContext();
 
@@ -65,11 +64,5 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        mShared = sharedPreferences;
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }
