@@ -3,7 +3,7 @@
     <string name="app_name">SchoolTimer</string>
     <string name="action_settings">Settings</string>
     <string name="number_of_ring">Number of a ring</string>
-    <string name="acceptation">Accept of changes</string>
+    <string name="acceptation">Acceptation of changes</string>
     <string name="accept">Accept</string>
     <string name="ringTime">Time of a ring(as a second of the day)</string>
 </resources>
