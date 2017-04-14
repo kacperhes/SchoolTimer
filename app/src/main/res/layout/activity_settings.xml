@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.mworld.schooltimer.DzwonkiSettingsActivity"
+    tools:context="pl.mworld.schooltimer.SettingsActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
 
@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
-            android:text="@string/numer_dzwonka"
+            android:text="@string/number_of_ring"
             android:textAlignment="center"
             android:layout_gravity="center_vertical"/>
 
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="@string/czas_dzwonka_jako_sekunda_dnia"
+            android:text="@string/ringTime"
             android:textAlignment="center"
             android:layout_gravity="center_vertical"/>
 
@@ -44,7 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="@string/potwierdzenie"
+            android:text="@string/acceptation"
             android:textAlignment="center"
             android:layout_gravity="center_vertical"/>
 
@@ -81,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:text="@string/zatwierd" />
+            android:text="@string/accept" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

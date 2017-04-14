@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DzwonkiSettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     long actualRingChanged = 1;
     EditText editText;
     SharedPreferences.Editor mSharedEditor;
@@ -25,7 +25,7 @@ public class DzwonkiSettingsActivity extends AppCompatActivity implements Adapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dzwonki_settings);
+        setContentView(R.layout.activity_settings);
 
         mShared = PreferenceManager.getDefaultSharedPreferences(this);
         mSharedEditor = mShared.edit();
