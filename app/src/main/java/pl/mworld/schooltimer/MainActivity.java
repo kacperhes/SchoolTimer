@@ -1,5 +1,6 @@
 package pl.mworld.schooltimer;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,15 +12,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     SharedPreferences mShared;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textView = (TextView) findViewById(R.id.timerTextView);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("HardwareIds")
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, Long.valueOf(mShared.getLong("1", 156)).toString(), Toast.LENGTH_LONG).show();
@@ -64,6 +70,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
         mShared = sharedPreferences;
-        Toast.makeText(this, s, Toast.LENGTH_SHORT);
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 }
