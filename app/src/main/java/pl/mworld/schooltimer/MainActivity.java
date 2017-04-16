@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * @author Hiosdra
+ */
 public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;
     TextView textView;
