@@ -16,7 +16,10 @@ import java.util.List;
 
 /**
  * @author Hiosdra
+ * TODO Edittext is too short
  * TODO Validation of ringtimes(next ring time must be greater than previous)
+ * TODO Comments around fields
+ * TODO Add actual time
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     private long actualRingChanged = 1;

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">SchoolTimer</string>
+    <string name="app_name">SchoolTimer</string>
     <string name="action_settings">Settings</string>
     <string name="number_of_ring">Number of a ring</string>
     <string name="acceptation">Acceptation of changes</string>

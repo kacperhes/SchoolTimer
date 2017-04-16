@@ -13,10 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * @author Hiosdra
+ * TODO COMMENTS
  */
 public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;
@@ -41,9 +41,12 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("HardwareIds")
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, Long.valueOf(mShared.getLong("1", 156)).toString(), Toast.LENGTH_LONG).show();
+                DeviceTester.getAndroidIdInToast(context);
+                //Toast.makeText(context, Boolean.toString(DeviceTester.isDev(context)), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, Long.valueOf(mShared.getLong("1", 156)).toString(), Toast.LENGTH_LONG).show();
             }
         });
+        //if(!DeviceTester.isDev(this)) fab.hide();
     }
 
     @Override
