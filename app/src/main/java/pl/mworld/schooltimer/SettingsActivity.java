@@ -21,15 +21,11 @@ import java.util.List;
  * TODO Comments around fields
  * TODO Add actual time
  */
-public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
-    private long actualRingChanged = 1;
-    private String actualRingChangedString;
-    private Long actualRingChangedValue;
+public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private long actualRingChanged = 1; // Number of actually changing ring(number in R.id.spinner)
     private EditText editText;
     private SharedPreferences.Editor mSharedEditor;
     private SharedPreferences mShared;
-    private Spinner spinner;
-    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,24 +37,28 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         mSharedEditor = mShared.edit();
 
         // Getting Spinner instance of ring number spinner and setting listener
-        spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
 
         // Getting EditText instance of ring time editor
         editText = (EditText) findViewById(R.id.editText);
 
         // Getting Button instance of acceptation editing ringtime and setting listener
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(this);
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener((view -> {
+            // Put time edited into actual ring
+            mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
+
+            setEdittextText();}));
 
         // Getting Spinner Drop down elements
-        List<String> ringList = new ArrayList<String>();
+        List<String> ringList = new ArrayList<>();
         for(int i = 1; i < 31; i++) {
-            ringList.add(new Integer(i).toString());
+            ringList.add(Integer.toString(i));
         }
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ringList);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringList);
 
         // Setting drop down layout style -> list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -78,16 +78,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        // Put time edited into actual ring
-        mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).commit();
-
         setEdittextText();
-
     }
 
     /**
@@ -95,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
      */
     private void setEdittextText() {
         // Get string of actual changed ring -> set text of edittext
-        actualRingChangedString = Long.valueOf(mShared.getLong(Long.valueOf(actualRingChanged).toString(), 0)).toString();
+        String actualRingChangedString = Long.valueOf(mShared.getLong(Long.valueOf(actualRingChanged).toString(), 0)).toString();
 
         // Set edittext text of actual ring
         editText.setText(actualRingChangedString);
