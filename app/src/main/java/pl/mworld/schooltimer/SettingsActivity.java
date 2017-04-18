@@ -19,14 +19,13 @@ import java.util.List;
  * @author Hiosdra
  * TODO Edittext is too short
  * TODO Validation of ringtimes(next ring time must be greater than previous)
- * TODO Comments around fields
  * TODO Add actual time
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private long actualRingChanged = 1; // Number of actually changing ring(number in R.id.spinner)
-    private EditText editText;
-    private SharedPreferences.Editor mSharedEditor;
-    private SharedPreferences mShared;
+    private long actualRingChanged = 1; // Number of actually changed ring(number in R.id.spinner)
+    private EditText editText; // Ring time edittext
+    private SharedPreferences.Editor mSharedEditor; // Editor of SharedPreferences
+    private SharedPreferences mShared; // Instance of SharedPreferences
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        // Seting actual edited ring
+        // Setting actual edited ring
         actualRingChanged = l + 1;
 
         setEdittextText();
