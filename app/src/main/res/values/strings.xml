@@ -5,4 +5,5 @@
     <string name="acceptation">Acceptation of changes</string>
     <string name="accept">Accept</string>
     <string name="ringTime">Time of a ring (as a second of the day)</string>
+    <string name="applied">Applied</string>
 </resources>

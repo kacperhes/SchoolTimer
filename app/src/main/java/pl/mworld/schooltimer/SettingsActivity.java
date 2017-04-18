@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +46,14 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
         // Getting Button instance of acceptation editing ringtime and setting listener
         Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener((view -> {
+        button.setOnClickListener( view -> {
             // Put time edited into actual ring
             mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
 
-            setEdittextText();}));
+            // Toast with done
+            Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show();
+
+            setEdittextText();});
 
         // Getting Spinner Drop down elements
         List<String> ringList = new ArrayList<>();
