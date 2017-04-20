@@ -1,6 +1,5 @@
 package pl.mworld.schooltimer;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,42 +10,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 /**
  * @author Hiosdra
- * TODO COMMENTS
  */
 public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;
-    TextView textView;
+    TextView textView; // TimerView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Getting TextView instance that shows timer
         textView = (TextView) findViewById(R.id.timerTextView);
 
+        // Setting up Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Getting instance of SharedPreferences
         mShared = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // Getting instance of Context
         final Context context = getApplicationContext();
 
+        // Setting up FloatingActionButton for debugging
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("HardwareIds")
-            @Override
-            public void onClick(View view) {
-                DeviceTester.getAndroidIdInToast(context);
-                //Toast.makeText(context, Boolean.toString(DeviceTester.isDev(context)), Toast.LENGTH_SHORT).show();
-                //Toast.makeText(context, Long.valueOf(mShared.getLong("1", 156)).toString(), Toast.LENGTH_LONG).show();
-            }
+        fab.setOnClickListener(view -> {
+            DeviceTester.getAndroidIdInToast(context);
+            //Toast.makeText(context, Boolean.toString(DeviceTester.isDev(context)), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, Long.valueOf(mShared.getLong("1", 156)).toString(), Toast.LENGTH_LONG).show();
         });
-        //if(!DeviceTester.isDev(this)) fab.hide();
+        // Hide FAB if device not listed as developer
+        if(!DeviceTester.isDev(this)) fab.hide();
     }
 
     @Override

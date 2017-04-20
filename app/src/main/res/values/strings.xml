@@ -6,4 +6,5 @@
     <string name="accept">Accept</string>
     <string name="ringTime">Time of a ring (as a second of the day)</string>
     <string name="applied">Applied</string>
+    <string name="validate_ring_text">Sorry, but ring times must be greater than previous</string>
 </resources>

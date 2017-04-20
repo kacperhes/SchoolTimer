@@ -17,9 +17,10 @@ import java.util.List;
 
 /**
  * @author Hiosdra
- * TODO Edittext is too short
  * TODO Validation of ringtimes(next ring time must be greater than previous)
  * TODO Add actual time
+ * TODO Validate_ring_string text do better
+ * TODO JavaDoc
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private long actualRingChanged = 1; // Number of actually changed ring(number in R.id.spinner)
@@ -45,14 +46,22 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
         // Getting Button instance of acceptation editing ringtime and setting listener
         Button button = (Button) findViewById(R.id.button);
+        //TODO - test validation
         button.setOnClickListener( view -> {
-            // Put time edited into actual ring
-            mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
+            // Validation
+            if(mShared.getLong(Long.toString(actualRingChanged - 1), 0) < Long.valueOf(editText.toString())) {
+                // Put time edited into actual ring
+                mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
 
-            // Toast with done
-            Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show();
+                // Toast with done
+                Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show();
 
-            setEdittextText();});
+                setEdittextText();
+            }
+            else {
+                Toast.makeText(this, R.string.validate_ring_text, Toast.LENGTH_LONG).show();
+            }
+            });
 
         // Getting Spinner Drop down elements
         List<String> ringList = new ArrayList<>();
