@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 /**
  * @author Hiosdra
+ * Main screen of app
  */
 public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;

@@ -2,12 +2,14 @@ package pl.mworld.schooltimer;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 /**
  * Created by ROOT on 2017-04-14.
+ * Identifies developer devices
  */
 
 class DeviceTester {
@@ -16,19 +18,15 @@ class DeviceTester {
         devList.add("62c0d9704e82021");
         //Add here developers
     }
-    @Deprecated
-    static boolean isHiosdra(Context context) {
-        return getAndroidId(context).equals("62c0d9704e82021");
-    }
 
-    static boolean isDev(Context context) {
+    static boolean isDev(@NonNull Context context) {
         return devList.contains(getAndroidId(context));
     }
 
-    static String getAndroidId(Context context){
+    static String getAndroidId(@NonNull Context context){
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
-    static void getAndroidIdInToast(Context context) {
+    static void getAndroidIdInToast(@NonNull Context context) {
         Toast.makeText(context, getAndroidId(context), Toast.LENGTH_SHORT).show();
     }
 }
