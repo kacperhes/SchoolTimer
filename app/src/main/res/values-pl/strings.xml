@@ -7,5 +7,5 @@
     <string name="acceptation">Potwierdzenie zmian</string>
     <string name="accept">Zatwierdź</string>
     <string name="applied">Zmieniono</string>
-    <string name="validate_ring_text">Sorry, ale dzwonki musza być coraz później</string>
+    <string name="validate_ring_text">Przepraszamy, ale dzwonki musza być coraz dalsze</string>
 </resources>
