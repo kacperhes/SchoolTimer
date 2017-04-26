@@ -100,6 +100,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         editText.setText(actualRingChangedString);
     }
 
+    /**
+     * Updates mShared with changes, shows toast with "applied" massage, updates edittext
+     */
     private void pushEdittextChanges () {
         // Put time edited into actual ring
         mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
