@@ -17,9 +17,7 @@ import java.util.List;
 
 /**
  * @author Hiosdra
- * TODO Validation of ringtimes(next ring time must be greater than previous)
  * TODO Add actual time
- * TODO Validate_ring_string text do better
  * TODO JavaDoc
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -46,17 +44,15 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
         // Getting Button instance of acceptation editing ringtime and setting listener
         Button button = (Button) findViewById(R.id.button);
-        //TODO - test validation
         button.setOnClickListener( view -> {
             // Validation
-            if(mShared.getLong(Long.toString(actualRingChanged - 1), 0) < Long.valueOf(editText.toString())) {
-                // Put time edited into actual ring
-                mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
-
-                // Toast with done
-                Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show();
-
-                setEdittextText();
+            if (!Long.valueOf(editText.getText().toString()).equals(1)) {
+                if(mShared.getLong(Long.toString(actualRingChanged - 1), 0) < Long.valueOf(editText.getText().toString())) {
+                    pushEdittextChanges();
+                }
+                else {
+                    Toast.makeText(this, R.string.validate_ring_text, Toast.LENGTH_LONG).show();
+                }
             }
             else {
                 Toast.makeText(this, R.string.validate_ring_text, Toast.LENGTH_LONG).show();
@@ -102,5 +98,15 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
         // Set edittext text of actual ring
         editText.setText(actualRingChangedString);
+    }
+
+    private void pushEdittextChanges () {
+        // Put time edited into actual ring
+        mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
+
+        // Toast with done
+        Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show();
+
+        setEdittextText();
     }
 }
