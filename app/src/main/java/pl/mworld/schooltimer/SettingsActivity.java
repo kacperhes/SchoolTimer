@@ -18,7 +18,6 @@ import java.util.List;
 /**
  * @author Hiosdra
  * TODO Add actual time
- * TODO JavaDoc
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private long actualRingChanged = 1; // Number of actually changed ring(number in R.id.spinner)
@@ -46,7 +45,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener( view -> {
             // Validation
-            if (!Long.valueOf(editText.getText().toString()).equals(1)) {
+            //TODO test validation
+            if (!Long.valueOf(editText.getText().toString()).equals(1) && editText.getText().toString() != null) {
                 if(mShared.getLong(Long.toString(actualRingChanged - 1), 0) < Long.valueOf(editText.getText().toString())) {
                     pushEdittextChanges();
                 }
