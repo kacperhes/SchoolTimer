@@ -41,9 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // Setting up FloatingActionButton for debugging
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            DeviceTester.getAndroidIdInToast(context);
-            //Toast.makeText(context, Boolean.toString(DeviceTester.isDev(context)), Toast.LENGTH_SHORT).show();
-            //Toast.makeText(context, Long.valueOf(mShared.getLong("1", 156)).toString(), Toast.LENGTH_LONG).show();
+            throw new RuntimeException(); // :)
         });
         // Hide FAB if device not listed as developer
         if(!DeviceTester.isDev(this)) fab.hide();
