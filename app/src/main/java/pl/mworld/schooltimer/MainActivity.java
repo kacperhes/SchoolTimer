@@ -37,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try{
+            Bundle bundle = getIntent().getExtras();
+            if(bundle.getBoolean("isFirebase")) {
+                //todo show sth when from firebase notification
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         // Getting TextView instance that shows timer
         textView = (TextView) findViewById(R.id.timerTextView);
 

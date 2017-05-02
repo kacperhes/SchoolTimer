@@ -33,7 +33,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
-    // [START receive_message]
     private String mesTitle;
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -64,6 +63,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      */
     private void sendNotification(String messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("isFirebase", true);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
