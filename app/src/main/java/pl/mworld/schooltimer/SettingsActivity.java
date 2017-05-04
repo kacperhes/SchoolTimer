@@ -33,10 +33,10 @@ import java.util.List;
  * todo logo
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private long actualRingChanged = 1; // Number of actually changed ring(number in R.id.spinner)
-    private EditText editText; // Ring time edittext
-    private SharedPreferences.Editor mSharedEditor; // Editor of SharedPreferences
-    private SharedPreferences mShared; // Instance of SharedPreferences
+    private long numberOfActualRingChanged = 1;
+    private EditText editRingTimeEditText;
+    private SharedPreferences.Editor mSharedEditor;
+    private SharedPreferences mShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +52,14 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner.setOnItemSelectedListener(this);
 
         // Getting EditText instance of ring time editor
-        editText = (EditText) findViewById(R.id.editText);
+        editRingTimeEditText = (EditText) findViewById(R.id.editText);
 
         // Getting Button instance of acceptation editing ringtime and setting listener
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener( view -> {
             // Validation
-            if (!Long.valueOf(editText.getText().toString()).equals(1) && editText.getText().toString() != null) {
-                if(mShared.getLong(Long.toString(actualRingChanged - 1), 0) < Long.valueOf(editText.getText().toString())) {
+            if (!Long.valueOf(editRingTimeEditText.getText().toString()).equals(1) && editRingTimeEditText.getText().toString() != null) {
+                if(mShared.getLong(Long.toString(numberOfActualRingChanged - 1), 0) < Long.valueOf(editRingTimeEditText.getText().toString())) {
                     pushEdittextChanges();
                 }
                 else {
@@ -91,7 +91,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         // Setting actual edited ring
-        actualRingChanged = l + 1;
+        numberOfActualRingChanged = l + 1;
 
         setEdittextText();
     }
@@ -106,10 +106,10 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
      */
     private void setEdittextText() {
         // Get string of actual changed ring -> set text of edittext
-        String actualRingChangedString = Long.valueOf(mShared.getLong(Long.valueOf(actualRingChanged).toString(), 0)).toString();
+        String actualRingChangedString = Long.valueOf(mShared.getLong(Long.valueOf(numberOfActualRingChanged).toString(), 0)).toString();
 
         // Set edittext text of actual ring
-        editText.setText(actualRingChangedString);
+        editRingTimeEditText.setText(actualRingChangedString);
     }
 
     /**
@@ -117,7 +117,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
      */
     private void pushEdittextChanges () {
         // Put time edited into actual ring
-        mSharedEditor.putLong(Long.valueOf(actualRingChanged).toString(), Long.valueOf(editText.getText().toString())).apply();
+        mSharedEditor.putLong(Long.valueOf(numberOfActualRingChanged).toString(), Long.valueOf(editRingTimeEditText.getText().toString())).apply();
 
         // Toast with done
         Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show();

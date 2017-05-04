@@ -30,7 +30,7 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;
-    TextView textView; // TimerView
+    TextView timerTextView; // TimerView
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Getting TextView instance that shows timer
-        textView = (TextView) findViewById(R.id.timerTextView);
+        timerTextView = (TextView) findViewById(R.id.timerTextView);
 
         // Setting up Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
