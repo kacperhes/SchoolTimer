@@ -30,33 +30,31 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;
-    TextView timerTextView; // TimerView
+    TextView timerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Getting TextView instance that shows timer
+        // Getting instances
         timerTextView = (TextView) findViewById(R.id.timerTextView);
+        mShared = PreferenceManager.getDefaultSharedPreferences(this);
+        final Context context = getApplicationContext();
 
         // Setting up Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Getting instance of SharedPreferences
-        mShared = PreferenceManager.getDefaultSharedPreferences(this);
-
-        // Getting instance of Context
-        final Context context = getApplicationContext();
-
         // Setting up FloatingActionButton for debugging
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            throw new RuntimeException(); // :)
-        });
-        // Hide FAB if device not listed as developer
         if(!DeviceTester.isDev(this)) fab.hide();
+        else {
+            fab.setOnClickListener(view -> {
+                throw new RuntimeException(); // :)
+            });
+        }
+
     }
 
     @Override

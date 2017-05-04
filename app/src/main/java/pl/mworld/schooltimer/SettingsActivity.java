@@ -43,19 +43,15 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // Getting SharedPreferences instance & editor
+        // Getting instances
         mShared = PreferenceManager.getDefaultSharedPreferences(this);
         mSharedEditor = mShared.edit();
-
-        // Getting Spinner instance of ring number spinner and setting listener
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
-
-        // Getting EditText instance of ring time editor
         editRingTimeEditText = (EditText) findViewById(R.id.editText);
-
-        // Getting Button instance of acceptation editing ringtime and setting listener
         Button button = (Button) findViewById(R.id.button);
+
+        // Setting up listeners
+        spinner.setOnItemSelectedListener(this);
         button.setOnClickListener( view -> {
             // Validation
             if (!Long.valueOf(editRingTimeEditText.getText().toString()).equals(1) && editRingTimeEditText.getText().toString() != null) {
