@@ -31,6 +31,7 @@ import java.util.List;
 /**
  * TODO Add actual time
  * todo logo
+ * todo what if ringtime = 0
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private long numberOfActualRingChanged = 1;
