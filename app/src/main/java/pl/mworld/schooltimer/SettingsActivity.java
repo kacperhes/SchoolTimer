@@ -54,16 +54,19 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner.setOnItemSelectedListener(this);
         button.setOnClickListener( view -> {
             // Validation
-            if (!Long.valueOf(editRingTimeEditText.getText().toString()).equals(1) && editRingTimeEditText.getText().toString() != null) {
-                if(mShared.getLong(Long.toString(numberOfActualRingChanged - 1), 0) < Long.valueOf(editRingTimeEditText.getText().toString())) {
+            if (!editRingTimeEditText.getText().toString().equals("")) {
+                if(mShared.getLong(Long.toString(numberOfActualRingChanged - 1), 0) <
+                        Long.valueOf(editRingTimeEditText.getText().toString())) {
                     pushEdittextChanges();
                 }
                 else {
-                    Toast.makeText(this, R.string.validate_ring_text, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.validate_ring_text,
+                            Toast.LENGTH_LONG).show();
                 }
             }
             else {
-                Toast.makeText(this, R.string.validate_ring_text, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.validate_ring_text,
+                        Toast.LENGTH_LONG).show();
             }
             });
 
@@ -74,7 +77,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         }
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringList);
+        ArrayAdapter<String> dataAdapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ringList);
 
         // Setting drop down layout style -> list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
