@@ -30,6 +30,7 @@ import java.util.List;
 
 /**
  * TODO Add actual time
+ * todo add edittext for h, m, s
  * todo logo
  * todo what if ringtime = 0
  */

@@ -8,7 +8,6 @@ import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,46 +41,68 @@ public class TimerService extends Service {
         for (long l : ringlist) {
             if (l != 0) filteredRingList.add(l);
         }
-        long sinceMidnight = GregorianCalendar.getInstance().get(Calendar.SECOND);//todo test
-        Log.e("TAG", String.valueOf(sinceMidnight));
+        Calendar thatMoment = GregorianCalendar.getInstance();
+        long sinceMidnight = thatMoment.get(Calendar.SECOND)
+                + (thatMoment.get(Calendar.MINUTE) * 60) + (thatMoment.get(Calendar.HOUR_OF_DAY) * 3600);//todo test
+        //todo probably good
+        //Log.e("TAG", String.valueOf(sinceMidnight) + String.valueOf(thatMoment.get(Calendar.SECOND)) + String.valueOf(thatMoment.get(Calendar.MINUTE)) + String.valueOf(thatMoment.get(Calendar.HOUR_OF_DAY)));
+        //Log.e("TAG", String.valueOf(sinceMidnight));
 
         int actualRing = 0;
         while(true) {
-            if (filteredRingList.get(actualRing) >= sinceMidnight) {
-                break;
+            if(filteredRingList.size() >= actualRing) {
+                if (filteredRingList.get(actualRing) >= sinceMidnight) {
+                    break;
+                }
+                else {
+                    actualRing++;
+                    }
             }
             else {
-                actualRing++;
+                //todo what if there isn`t any ring today anymore
+                break;
             }
         }
 
         mBuilder = new NotificationCompat.Builder(getApplicationContext());
         mBuilder.setSmallIcon(R.drawable.ic_notify)
-                .setContentTitle("Remaining time")
+                .setContentTitle(getString(R.string.remaining_time_to_ring))
                 .setContentText("")
                 .setAutoCancel(false)
                 .setOngoing(true)
                 .setWhen(0);
+        mManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        new CountDownTimer(filteredRingList.get(actualRing) - sinceMidnight, 1000) {
+        new CountDownTimer((filteredRingList.get(actualRing) - sinceMidnight)*1000, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                push(millisUntilFinished);
+                mBuilder.setContentText(format(millisUntilFinished));
+                mManager.notify(1, mBuilder.build());
             }
 
             @Override
             public void onFinish() {
-                push(0);
+                mBuilder.setContentText(String.valueOf(getString(R.string.ring_is_ringing)));//todo string
+                mManager.notify(1, mBuilder.build());
             }
         }.start();
 
     }
 
-    void push(long l){
-        mBuilder.setContentText(String.valueOf(l));
-        mManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        mManager.notify(1, mBuilder.build());
+    String format(long l) {
+        l = l/1000;
+        String s;
+        s = String.valueOf(l/3600) + ":";//HH
+        Long temp = l/3600;
+        temp = temp * 3600;
+        l = l - temp;
+        s = s + String.valueOf(l/60) + ":";//mm
+        temp = l/60;
+        temp = temp * 60;
+        l = l - temp;
+        s = s + String.valueOf(l);//ss
+        return s;
     }
 
     @Override

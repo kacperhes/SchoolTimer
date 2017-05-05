@@ -48,15 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO not final implementation
         Intent intent = new Intent(this, TimerService.class);
-        startService(intent);
+        //startService(intent);
 
         // Setting up FloatingActionButton for debugging
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if(!DeviceTester.isDev(this)) fab.hide();
         else {
             fab.setOnClickListener(view -> {
-                stopService(intent);
+                //stopService(intent);
+                startService(intent);
             });
+            fab.setOnLongClickListener(view -> stopService(intent));
         }
     }
 

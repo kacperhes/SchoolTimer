@@ -8,4 +8,6 @@
     <string name="accept">Zatwierdź</string>
     <string name="applied">Zmieniono</string>
     <string name="validate_ring_text">Przepraszamy, ale dzwonki musza być coraz dalsze</string>
+    <string name="remaining_time_to_ring">Czas do dzwonka:</string>
+    <string name="ring_is_ringing">Dzwonek!!!</string>
 </resources>

@@ -7,4 +7,6 @@
     <string name="ringTime">Time of a ring (as a second of the day)</string>
     <string name="applied">Applied</string>
     <string name="validate_ring_text">Sorry, but ring time must be greater than previous</string>
+    <string name="remaining_time_to_ring">Remaining time:</string>
+    <string name="ring_is_ringing">Ring!!!</string>
 </resources>
