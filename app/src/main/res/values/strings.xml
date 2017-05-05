@@ -9,4 +9,7 @@
     <string name="validate_ring_text">Sorry, but ring time must be greater than previous</string>
     <string name="remaining_time_to_ring">Remaining time:</string>
     <string name="ring_is_ringing">Ring!!!</string>
+    <string name="hour_notification">h</string>
+    <string name="minute_notification">"minute "</string>
+    <string name="seconds_notification">"seconds "</string>
 </resources>
