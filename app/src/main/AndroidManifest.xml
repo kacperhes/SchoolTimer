@@ -30,10 +30,6 @@
             android:name=".TimerService"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name=".TimerServiceRestarterService"
-            android:enabled="true"
-            android:exported="true"></service>
     </application>
 
 </manifest>
