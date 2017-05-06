@@ -10,7 +10,4 @@
     <string name="validate_ring_text">Przepraszamy, ale dzwonki musza być coraz dalsze</string>
     <string name="remaining_time_to_ring">Czas do dzwonka:</string>
     <string name="ring_is_ringing">Dzwonek!!!</string>
-    <string name="hour_notification">h</string>
-    <string name="minute_notification">"minut "</string>
-    <string name="seconds_notification">"sekund "</string>
 </resources>

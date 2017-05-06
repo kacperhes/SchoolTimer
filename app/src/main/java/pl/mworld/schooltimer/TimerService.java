@@ -83,7 +83,6 @@ public class TimerService extends Service {
             }
         }
 
-        //todo put into if statement above
         if(canRun) {
             new CountDownTimer((filteredRingList.get(actualRing) - sinceMidnight)*1000, 1000) {
 
@@ -120,15 +119,15 @@ public class TimerService extends Service {
     String format(long l) {
         l = l/1000;
         String s;
-        s = String.valueOf(l/3600) + getString(R.string.hour_notification);//HH
+        s = String.valueOf(l/3600) + "h ";//HH
         Long temp = l/3600;
         temp = temp * 3600;
         l = l - temp;
-        s = s + String.valueOf(l/60) + getString(R.string.minute_notification);//mm
+        s = s + String.valueOf(l/60) + "min ";//mm
         temp = l/60;
         temp = temp * 60;
         l = l - temp;
-        s = s + String.valueOf(l) + getString(R.string.seconds_notification);//ss
+        s = s + String.valueOf(l) + "sec";//ss
         return s;
     }
 
