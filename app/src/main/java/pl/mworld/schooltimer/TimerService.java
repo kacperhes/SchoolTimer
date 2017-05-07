@@ -18,10 +18,10 @@ import java.util.List;
 //todo extend -> stop notification and progress bar
 //todo what if weekend
 public class TimerService extends Service {
-    NotificationCompat.Builder mBuilder;
-    NotificationManager mManager;
-    Context context;
-    List<Long> filteredRingList;
+    private NotificationCompat.Builder mBuilder;
+    private NotificationManager mManager;
+    private List<Long> filteredRingList;
+    static private boolean isRunning = false;
     public TimerService() {
     }
 
@@ -40,7 +40,7 @@ public class TimerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        context = getApplicationContext();
+        Context context = getApplicationContext();
 
         // Getting list of rings
         SharedPreferences mShared = PreferenceManager.getDefaultSharedPreferences(context);
@@ -73,43 +73,40 @@ public class TimerService extends Service {
                 (thatMoment.get(Calendar.MINUTE) * 60) + (thatMoment.get(Calendar.HOUR_OF_DAY) * 3600);
 
         // Calculation what ring is next
-        boolean canRun = false; //todo test if this don`t exist
         int actualRing = 0;
         long toNextRing;
         while(true) {
             if(filteredRingList.size() > actualRing) {
                 if (filteredRingList.get(actualRing) >= sinceMidnight) {
                     toNextRing = filteredRingList.get(actualRing) - sinceMidnight;
-                    canRun = true;
                     break;
                 }
                 else actualRing++;
             }
             else {
                 toNextRing = filteredRingList.get(0) + (86400 - sinceMidnight);
-                canRun = true;
                 break;
             }
         }
 
         // Running timer
-        if(canRun) {
-            new CountDownTimer(toNextRing*1000, 1000) {
+        isRunning = true;
+        new CountDownTimer(toNextRing*1000, 1000) {
 
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    mBuilder.setContentText(format(millisUntilFinished));
-                    mManager.notify(1, mBuilder.build());
-                }
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mBuilder.setContentText(format(millisUntilFinished));
+                mManager.notify(1, mBuilder.build());
+            }
 
-                @Override
-                public void onFinish() {
-                    mBuilder.setContentText(getString(R.string.ring_is_ringing));
-                    mManager.notify(1, mBuilder.build());
-                    restartTimer();
-                }
-            }.start();
-        }
+            @Override
+            public void onFinish() {
+                mBuilder.setContentText(getString(R.string.ring_is_ringing));
+                mManager.notify(1, mBuilder.build());
+                isRunning = false;
+                restartTimer();
+            }
+        }.start();
     }
 
     /**
@@ -142,5 +139,9 @@ public class TimerService extends Service {
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    static public boolean isRunning() {
+        return isRunning;
     }
 }

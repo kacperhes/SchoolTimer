@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Starting timer in notification
-        startService(new Intent(this, TimerService.class));
+        if(!TimerService.isRunning()) startService(new Intent(this, TimerService.class));
 
         // Setting up FloatingActionButton for debugging
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
