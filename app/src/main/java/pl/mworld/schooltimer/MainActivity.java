@@ -46,19 +46,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //TODO not final implementation
-        Intent intent = new Intent(this, TimerService.class);
-        //startService(intent);
+        // Starting timer in notification
+        startService(new Intent(this, TimerService.class));
 
         // Setting up FloatingActionButton for debugging
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if(!DeviceTester.isDev(this)) fab.hide();
         else {
             fab.setOnClickListener(view -> {
-                //stopService(intent);
-                startService(intent);
+               //Debug
             });
-            fab.setOnLongClickListener(view -> stopService(intent));
         }
     }
 
