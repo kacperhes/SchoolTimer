@@ -29,10 +29,10 @@ import java.util.List;
 //         limitations under the License.
 
 /**
- * TODO Add actual time
  * todo add edittext for h, m, s
  * todo logo
  * todo what if ringtime = 0
+ * todo weekends
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private long numberOfActualRingChanged = 1;
@@ -57,13 +57,16 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         button.setOnClickListener( view -> {
             // Validation
             if (!editRingTimeEditText.getText().toString().equals("")) {
-                if(mShared.getLong(Long.toString(numberOfActualRingChanged - 1), 0) <
-                        Long.valueOf(editRingTimeEditText.getText().toString())) {
+                if (mShared.getLong(Long.toString(numberOfActualRingChanged - 1), 0) <
+                        Long.valueOf(editRingTimeEditText.getText().toString()))
                     pushEdittextChanges();
-                }
                 else {
-                    Toast.makeText(this, R.string.validate_ring_text,
-                            Toast.LENGTH_LONG).show();
+                    if (Long.valueOf(editRingTimeEditText.getText().toString()).equals(0))
+                        pushEdittextChanges();
+                    else {
+                        Toast.makeText(this, R.string.validate_ring_text,
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
             }
             else {
@@ -108,7 +111,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
      */
     private void setEdittextText() {
         // Get string of actual changed ring -> set text of edittext
-        String actualRingChangedString = Long.valueOf(mShared.getLong(Long.valueOf(numberOfActualRingChanged).toString(), 0)).toString();
+        String actualRingChangedString = Long.valueOf(
+                mShared.getLong(Long.valueOf(numberOfActualRingChanged).toString(), 0)).toString();
 
         // Set edittext text of actual ring
         editRingTimeEditText.setText(actualRingChangedString);
@@ -119,7 +123,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
      */
     private void pushEdittextChanges () {
         // Put time edited into actual ring
-        mSharedEditor.putLong(Long.valueOf(numberOfActualRingChanged).toString(), Long.valueOf(editRingTimeEditText.getText().toString())).apply();
+        mSharedEditor.putLong(Long.valueOf(numberOfActualRingChanged).toString(),
+                Long.valueOf(editRingTimeEditText.getText().toString())).apply();
 
         // Toast with done
         Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show();

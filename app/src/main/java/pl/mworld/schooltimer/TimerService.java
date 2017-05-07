@@ -16,6 +16,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 //todo extend -> stop notification and progress bar
+//todo what if weekend
 public class TimerService extends Service {
     NotificationCompat.Builder mBuilder;
     NotificationManager mManager;
@@ -41,7 +42,8 @@ public class TimerService extends Service {
         super.onCreate();
         context = getApplicationContext();
 
-        SharedPreferences mShared = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // Getting list of rings
+        SharedPreferences mShared = PreferenceManager.getDefaultSharedPreferences(context);
         List<Long> ringlist = new ArrayList<>(20);
         filteredRingList = new ArrayList<>();
         for(long l = 1; l < 21; l++) {
@@ -51,6 +53,7 @@ public class TimerService extends Service {
             if (l != 0) filteredRingList.add(l);
         }
 
+        // Setting up notification
         mBuilder = new NotificationCompat.Builder(context);
         mBuilder.setSmallIcon(R.drawable.ic_notify)
                 .setContentTitle(getString(R.string.remaining_time_to_ring))
@@ -64,25 +67,34 @@ public class TimerService extends Service {
     }
 
     void runTimer() {
+        // Getting what is the time since midnight
         Calendar thatMoment = GregorianCalendar.getInstance();
         long sinceMidnight = thatMoment.get(Calendar.SECOND) +
                 (thatMoment.get(Calendar.MINUTE) * 60) + (thatMoment.get(Calendar.HOUR_OF_DAY) * 3600);
 
-        boolean canRun = false;
+        // Calculation what ring is next
+        boolean canRun = false; //todo test if this don`t exist
         int actualRing = 0;
+        long toNextRing;
         while(true) {
             if(filteredRingList.size() > actualRing) {
                 if (filteredRingList.get(actualRing) >= sinceMidnight) {
+                    toNextRing = filteredRingList.get(actualRing) - sinceMidnight;
                     canRun = true;
                     break;
                 }
                 else actualRing++;
             }
-            else break;
+            else {
+                toNextRing = filteredRingList.get(0) + (86400 - sinceMidnight);
+                canRun = true;
+                break;
+            }
         }
 
+        // Running timer
         if(canRun) {
-            new CountDownTimer((filteredRingList.get(actualRing) - sinceMidnight)*1000, 1000) {
+            new CountDownTimer(toNextRing*1000, 1000) {
 
                 @Override
                 public void onTick(long millisUntilFinished) {
@@ -94,12 +106,16 @@ public class TimerService extends Service {
                 public void onFinish() {
                     mBuilder.setContentText(getString(R.string.ring_is_ringing));
                     mManager.notify(1, mBuilder.build());
-                    restart();
+                    restartTimer();
                 }
             }.start();
         }
     }
 
+    /**
+     * @param l Time to calculate
+     * @return Time in preset "10h 15min 54sec"
+     */
     String format(long l) {
         l = l/1000;
         String s;
@@ -115,7 +131,10 @@ public class TimerService extends Service {
         return s;
     }
 
-    void restart() {
+    /**
+     * Restarts timer
+     */
+    void restartTimer() {
         runTimer();
     }
 
