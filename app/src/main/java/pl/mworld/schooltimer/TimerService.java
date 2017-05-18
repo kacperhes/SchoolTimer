@@ -44,9 +44,9 @@ public class TimerService extends Service {
 
         // Getting list of rings
         SharedPreferences mShared = PreferenceManager.getDefaultSharedPreferences(context);
-        List<Long> ringlist = new ArrayList<>(20);
+        List<Long> ringlist = new ArrayList<>(30);
         filteredRingList = new ArrayList<>();
-        for(long l = 1; l < 21; l++) {
+        for(long l = 1; l < 31; l++) {
             ringlist.add(mShared.getLong(Long.toString(l), 0));
         }
         for (long l : ringlist) {

@@ -4,8 +4,8 @@
     <string name="action_settings">Ustawienia</string>
     <string name="ringTime">Czas dzwonka(jako sekunda dnia)</string>
     <string name="number_of_ring">Numer dzwonka</string>
-    <string name="acceptation">Potwierdzenie zmian</string>
-    <string name="accept">Zatwierdź</string>
+    <string name="acceptation">Wprowadzanie czasu</string>
+    <string name="accept">Wprowadź</string>
     <string name="applied">Zmieniono</string>
     <string name="validate_ring_text">Przepraszamy, ale dzwonki musza być coraz dalsze</string>
     <string name="remaining_time_to_ring">Czas do dzwonka:</string>

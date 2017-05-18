@@ -2,8 +2,8 @@
     <string name="app_name">SchoolTimer</string>
     <string name="action_settings">Settings</string>
     <string name="number_of_ring">Number of a ring</string>
-    <string name="acceptation">Acceptation of changes</string>
-    <string name="accept">Accept</string>
+    <string name="acceptation">Choosing time</string>
+    <string name="accept">Choose</string>
     <string name="ringTime">Time of a ring (as a second of the day)</string>
     <string name="applied">Applied</string>
     <string name="validate_ring_text">Sorry, but ring time must be greater than previous</string>
