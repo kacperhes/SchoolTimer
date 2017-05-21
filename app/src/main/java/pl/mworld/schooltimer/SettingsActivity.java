@@ -34,6 +34,7 @@ import java.util.List;
  * todo weekends
  * todo make devicetester as library
  * todo countdownview
+ * todo app crashes when there isn`t any ring(like 1st opening)
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private long numberOfActualRingChanged = 1;
