@@ -110,7 +110,7 @@ public class TimerService extends Service {
                 mBuilder.setContentText(getString(R.string.ring_is_ringing));
                 mManager.notify(1, mBuilder.build());
                 isRunning = false;
-                restartTimer();
+                rerunTimer();
             }
         }.start();
     }
@@ -137,7 +137,7 @@ public class TimerService extends Service {
     /**
      * Restarts timer
      */
-    void restartTimer() {
+    void rerunTimer() {
         runTimer();
     }
 

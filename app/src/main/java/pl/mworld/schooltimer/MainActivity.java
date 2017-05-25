@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
         countdownView.setOnCountdownEndListener(countdownView1 -> countdownView1.start(5025));
 
         // Starting timer in notification
-       // if(!TimerService.isRunning()) startService(new Intent(this, TimerService.class));
+       if(!TimerService.isRunning()) {
+           if (mShared.getLong("1", 0) != 0) {
+               startService(new Intent(this, TimerService.class));
+           }
+       }
 
         // Setting up FloatingActionButton for debugging
        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         //if(!DeviceTester.isDev(this)) fab.hide();
         //else {
             fab.setOnClickListener(view -> {
-                startService(new Intent(this, TimerService.class));
+                setSharedIntoSchool(mShared.edit());
             });
         //}
     }
@@ -83,5 +87,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Deprecated
+    private void setSharedIntoSchool(SharedPreferences.Editor mSharedEditor) {
+        mSharedEditor.putLong("1", 28900)
+                .putLong("2", 31600)
+                .putLong("3", 31897)
+                .putLong("4", 34600)
+                .putLong("5", 34900)
+                .putLong("6", 37600)
+                .putLong("7", 38200)
+                .putLong("8", 40900)
+                .putLong("9", 41500)
+                .putLong("10", 44200)
+                .putLong("11", 45700)
+                .putLong("12", 48400)
+                .putLong("13", 49600)
+                .putLong("14", 52300)
+                .putLong("15", 52600)
+                .putLong("16", 55300)
+                .putLong("17", 55600)
+                .putLong("18", 58300)
+                .commit();
     }
 }

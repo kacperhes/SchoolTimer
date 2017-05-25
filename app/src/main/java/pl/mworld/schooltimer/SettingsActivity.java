@@ -1,5 +1,6 @@
 package pl.mworld.schooltimer;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -59,6 +60,14 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             MyTimePickerDialog mTimePicker = new MyTimePickerDialog(this, (view1, hourOfDay, minute, seconds) -> {
                 mSharedEditor.putLong(Long.valueOf(numberOfActualRingChanged).toString(),
                         (long) ((hourOfDay * 3600) + (minute * 60) + seconds)).apply();
+                if(TimerService.isRunning()) {
+                    Intent intent = new Intent(this, TimerService.class);
+                    stopService(intent);
+                    startService(intent);
+                }
+                else {
+                    startService(new Intent(this, TimerService.class));
+                }
             }, list.get(0), list.get(1), list.get(2), true);
             mTimePicker.show();
             });
