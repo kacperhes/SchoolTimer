@@ -1,6 +1,5 @@
 package pl.mworld.schooltimer;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import cn.iwgang.countdownview.CountdownView;
 // Copyright 2017 Hiosdra
@@ -32,7 +30,6 @@ import cn.iwgang.countdownview.CountdownView;
  */
 public class MainActivity extends AppCompatActivity {
     SharedPreferences mShared;
-    TextView timerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Getting instances
-       // timerTextView = (TextView) findViewById(R.id.timerTextView);
         mShared = PreferenceManager.getDefaultSharedPreferences(this);
-        final Context context = getApplicationContext();
 
         // Setting up Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
