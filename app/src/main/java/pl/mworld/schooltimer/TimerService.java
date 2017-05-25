@@ -22,6 +22,7 @@ public class TimerService extends Service {
     private NotificationManager mManager;
     private List<Long> filteredRingList;
     static private boolean isRunning = false;
+
     public TimerService() {
     }
 
@@ -52,7 +53,6 @@ public class TimerService extends Service {
         for (long l : ringlist) {
             if (l != 0) filteredRingList.add(l);
         }
-
         // Setting up notification
         mBuilder = new NotificationCompat.Builder(context);
         mBuilder.setSmallIcon(R.drawable.ic_notify)
@@ -62,6 +62,12 @@ public class TimerService extends Service {
                 .setOngoing(true)
                 .setWhen(0);
         mManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        /*if(filteredRingList.isEmpty()) {
+            mBuilder.setContentText(getString(R.string.No_Ring));
+            mBuilder.setOngoing(false);
+            mManager.notify(1, mBuilder.build());
+        }*/
 
         runTimer();
     }
@@ -137,7 +143,6 @@ public class TimerService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

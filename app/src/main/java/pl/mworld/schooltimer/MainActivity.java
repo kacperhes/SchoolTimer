@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import cn.iwgang.countdownview.CountdownView;
 // Copyright 2017 Hiosdra
 //
 //         Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,13 +40,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Getting instances
-        timerTextView = (TextView) findViewById(R.id.timerTextView);
+       // timerTextView = (TextView) findViewById(R.id.timerTextView);
         mShared = PreferenceManager.getDefaultSharedPreferences(this);
         final Context context = getApplicationContext();
 
         // Setting up Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // CountdownView
+        CountdownView countdownView = (CountdownView) findViewById(R.id.CountdownView);
+        countdownView.start(10000);
+        countdownView.setOnCountdownEndListener(countdownView1 -> countdownView1.start(5025));
 
         // Starting timer in notification
        // if(!TimerService.isRunning()) startService(new Intent(this, TimerService.class));

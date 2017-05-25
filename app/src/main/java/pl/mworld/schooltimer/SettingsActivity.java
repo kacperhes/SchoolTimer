@@ -30,11 +30,11 @@ import java.util.List;
 
 /**
  * todo validation
- * todo what if ringtime = 0
+ * todo what if ringtime = 0 -> probably solved
  * todo weekends
- * todo make devicetester as library
  * todo countdownview
  * todo app crashes when there isn`t any ring(like 1st opening)
+ * todo intro screen
  */
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private long numberOfActualRingChanged = 1;
@@ -56,10 +56,10 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner.setOnItemSelectedListener(this);
         button.setOnClickListener( view -> {
             List<Integer> list = formatActualRingChangedTimeIntoArrayList();
-            MyTimePickerDialog mTimePicker = new MyTimePickerDialog(this, (view1, hourOfDay, minute, seconds)
-                    -> mSharedEditor.putLong(Long.valueOf(numberOfActualRingChanged).toString(),
-                    (long) ((hourOfDay * 3600) + (minute * 60) + seconds)).apply(),
-                    list.get(0), list.get(1), list.get(2), true);
+            MyTimePickerDialog mTimePicker = new MyTimePickerDialog(this, (view1, hourOfDay, minute, seconds) -> {
+                mSharedEditor.putLong(Long.valueOf(numberOfActualRingChanged).toString(),
+                        (long) ((hourOfDay * 3600) + (minute * 60) + seconds)).apply();
+            }, list.get(0), list.get(1), list.get(2), true);
             mTimePicker.show();
             });
 

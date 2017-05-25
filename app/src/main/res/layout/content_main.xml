@@ -9,14 +9,33 @@
     tools:showIn="@layout/activity_main"
     tools:context="pl.mworld.schooltimer.MainActivity">
 
-    <TextView
+    <cn.iwgang.countdownview.CountdownView
+        android:id="@+id/CountdownView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00"
-        android:id="@+id/timerTextView"
+        app:isHideTimeBackground="true"
+        app:isShowDay="false"
+        app:isShowHour="true"
+        app:isShowMinute="true"
+        app:isShowSecond="true"
+        app:isShowMillisecond="false"
+        app:timeTextColor="#000000"
+        app:timeTextSize="64sp"
+        app:isTimeTextBold="true"
+        app:suffixGravity="bottom"
+        app:suffixTextColor="#000000"
+        app:suffixTextSize="32sp"
+        app:suffixHour="h"
+        app:suffixMinute="min"
+        app:suffixSecond="sec"
+        app:suffixMillisecond=""
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
 
 </android.support.constraint.ConstraintLayout>
