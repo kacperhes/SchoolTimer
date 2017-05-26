@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * UtilCommomFastuse
+     */
     @Deprecated
     private void setSharedIntoSchool(SharedPreferences.Editor mSharedEditor) {
         mSharedEditor.putLong("1", 28900)
