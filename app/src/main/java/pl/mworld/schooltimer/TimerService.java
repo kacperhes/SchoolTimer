@@ -42,17 +42,8 @@ public class TimerService extends Service {
     public void onCreate() {
         super.onCreate();
         Context context = getApplicationContext();
+        getListOfRings(context);
 
-        // Getting list of rings
-        SharedPreferences mShared = PreferenceManager.getDefaultSharedPreferences(context);
-        List<Long> ringlist = new ArrayList<>(30);
-        filteredRingList = new ArrayList<>();
-        for(long l = 1; l < 31; l++) {
-            ringlist.add(mShared.getLong(Long.toString(l), 0));
-        }
-        for (long l : ringlist) {
-            if (l != 0) filteredRingList.add(l);
-        }
         // Setting up notification
         mBuilder = new NotificationCompat.Builder(context);
         mBuilder.setSmallIcon(R.drawable.ic_notify)
@@ -148,5 +139,21 @@ public class TimerService extends Service {
 
     static public boolean isRunning() {
         return isRunning;
+    }
+
+    /**
+     * @param context
+     * Get filtered list of rings
+     */
+    private void getListOfRings(Context context) {
+        SharedPreferences mShared = PreferenceManager.getDefaultSharedPreferences(context);
+        List<Long> ringlist = new ArrayList<>(30);
+        filteredRingList = new ArrayList<>();
+        for (long l = 1; l < 31; l++) {
+            ringlist.add(mShared.getLong(Long.toString(l), 0));
+        }
+        for (long l : ringlist) {
+            if (l != 0) filteredRingList.add(l);
+        }
     }
 }
